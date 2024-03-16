@@ -1,0 +1,70 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerScricpt : MonoBehaviour
+{
+    public Rigidbody rigidbody;
+    public float force = 1000f;
+    public float speed = 10f;
+    public float MaxEdge;
+    public float MinEdge;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        Vector3 playerPos = transform.position;// this will create a vector3 ( x,y,z) name of playerpos
+        playerPos.x = Mathf.Clamp(playerPos.x,MinEdge,MaxEdge);//here we use mathf.clamp unity function 
+        transform.position = playerPos;
+        /*
+         * 
+         * another method to clamp player object:
+         * if (playerPos.x < MinEdge)
+        {
+            playerPos.x = MinEdge;
+        }
+        transform.position = playerPos;
+
+        if (playerPos.x > MaxEdge)
+        {
+            playerPos.x = MaxEdge;
+        }
+        transform.position = playerPos;
+
+        */
+
+
+        // This use Input.GetKey(KeyCode.key)) function to input from keyboard
+
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.position = transform.position + new Vector3(speed * Time.deltaTime, 0, 0);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.position = transform.position + new Vector3(speed * Time.deltaTime, 0, 0);
+        }
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.position = transform.position - new Vector3(speed * Time.deltaTime, 0, 0);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.position = transform.position - new Vector3(speed * Time.deltaTime, 0, 0);
+        }
+    }
+    private void FixedUpdate()
+    {
+        //rigidbody.AddForce(0,0,force* Time.deltaTime);
+    }
+    
+    }
+
